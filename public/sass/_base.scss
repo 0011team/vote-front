@@ -1,0 +1,167 @@
+@import "public/sass/utils.scss";
+
+/* reset */
+@import "./fontface.scss";
+
+html {
+	height: 100%;
+}
+body {
+	height: 100%;
+	background: #fff;
+	color: $color-def;
+	font-size: 14px;
+	-webkit-text-size-adjust: none;
+	font-family: $font-def;
+}
+body, div, 
+dl, dt, dd, ul, ol, li,
+h1, h2, h3, h4, h5, h6,
+pre, form, fieldset, input, select, textarea, p, blockquote, th, td, legend, button {
+	margin: 0;
+	padding: 0;
+}
+h1, h2, h3, h4, h5, h6 {
+	font-family: $font-str;
+	color: $color-def;
+}
+article, section, nav, header, footer, main {
+	display: block;
+}
+table {
+	width: 100%;
+	border-spacing: 0;
+	th {
+		font-weight: normal;
+	}
+}
+form, fieldset, img {
+	border:0 none;
+}
+ul, ol, li{
+	list-style: none outside;
+}
+a {
+	text-decoration: none;
+	color: $color-def; 
+}
+i, em, address {
+	font-style: normal;
+}
+li, p, dt, dd, div, span{
+	word-break: break-all;
+}
+button,
+input[type='button'],
+input[type='submit'],
+input[type='reset'],
+input[type='search'] {
+	cursor: pointer;
+	-webkit-border-radius: 0;
+	border-radius: 0;
+	border: none;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    font-size: 14px;
+    font-family: $font-def;
+    background: none;
+}
+input[type=search]::-webkit-search-cancel-button {
+	-webkit-appearance: none;
+}
+legend, caption {
+	@include hiddenText;
+}
+hr {
+	display: none;
+}
+select {
+	height: 46px;
+	border: none;
+	padding: 0 35px 0 16px;
+	background: #fff url('/static/images/select_arrow.png') no-repeat 100% 19px;
+	background: {
+		color: #f4f4f4;
+		size: auto 9px;
+	}
+	border-radius: 8px;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	color: $color-def;
+	font: {
+		family: $font-def;
+		size: 16px;
+	}
+	vertical-align: top;
+	box-sizing: border-box;
+}
+
+select::-ms-expand { 
+  display: none;
+}
+
+.layout {
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+header {
+	@include inlay;
+	position: relative;
+	padding: 20px 20px 0;
+	h1 {
+		a {
+			color: $color-point;
+			font: {
+				size: 24px;
+				family: 'AvenirNextLTPro';
+			}
+			line-height: 33px;
+		}
+		span {
+			padding-left: 6px;
+			font-size: 16px;
+			vertical-align: middle;
+		}
+	}
+	.menu {
+		position: absolute;
+		top: 20px;
+		right: 20px;
+		button {
+			position: relative;
+			width: 35px;
+			height: 35px;
+			background: #f4f4f4;
+			border-radius: 50%;
+			&:before,
+			&:after {
+				content: '';
+				display: block;
+				position: absolute;
+				left: 10px;
+				width: 15px;
+				height: 2px;
+				background: $color-point;
+				border-radius: 2px;
+			}
+			&:before {
+				top: 16px;
+			}
+			&:after {
+				top: 21px;
+			}
+			span {
+				@include hiddenText;
+				position: absolute;
+				top: 11px;
+				left: 10px;
+				width: 15px;
+				height: 2px;
+				border-radius: 2px;
+				background: $color-point;
+			}
+		}
+	}
+}

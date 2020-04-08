@@ -1,0 +1,34 @@
+/* var */
+$color-def: #000;
+$color-sub: #999;
+$color-point: #1a73e8;
+$font-def: 'NanumSquare','Roboto','Droid Sans','Malgun Gothic','Helvetica','Apple-Gothic','애플고딕','Tahoma',dotum,'돋움',gulim,'굴림', sans-serif;
+$font-em: 'NanumSquareB','Roboto','Droid Sans','Malgun Gothic','Helvetica','Apple-Gothic','애플고딕','Tahoma',dotum,'돋움',gulim,'굴림', sans-serif;
+$font-str: 'NanumSquareEB','Roboto','Droid Sans','Malgun Gothic','Helvetica','Apple-Gothic','애플고딕','Tahoma',dotum,'돋움',gulim,'굴림', sans-serif;
+
+/* mixin */
+//base
+@mixin hiddenText {
+	overflow: hidden;
+    display: inline-block;
+	font-size: 1px;
+	line-height: 0;
+	text: {
+		indent: -9999px;
+		align: left;
+	}
+}
+@mixin clearfix {
+	&:after {
+		display: block;
+		content:'';
+		clear: both;
+	}
+}
+//contents
+@mixin inlay {
+	max-width: 720px;
+	width: 100%;
+	margin: 0 auto;
+	box-sizing: border-box;
+}

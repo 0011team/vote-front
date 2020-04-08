@@ -1,0 +1,67 @@
+@import "base.scss";
+@import "utils.scss";
+
+body {
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+}
+header {
+	@include inlay;
+	position: relative;
+	padding: 20px 20px 0;
+	h1 {
+		a {
+			color: $color-point;
+			font: {
+				size: 24px;
+				family: 'AvenirNextLTPro';
+			}
+			line-height: 33px;
+		}
+		span {
+			padding-left: 6px;
+			font-size: 16px;
+			vertical-align: middle;
+		}
+	}
+	.menu {
+		position: absolute;
+		top: 20px;
+		right: 20px;
+		button {
+			position: relative;
+			width: 35px;
+			height: 35px;
+			background: #f4f4f4;
+			border-radius: 50%;
+			&:before,
+			&:after {
+				content: '';
+				display: block;
+				position: absolute;
+				left: 10px;
+				width: 15px;
+				height: 2px;
+				background: $color-point;
+				border-radius: 2px;
+			}
+			&:before {
+				top: 16px;
+			}
+			&:after {
+				top: 21px;
+			}
+			span {
+				@include hiddenText;
+				position: absolute;
+				top: 11px;
+				left: 10px;
+				width: 15px;
+				height: 2px;
+				border-radius: 2px;
+				background: $color-point;
+			}
+		}
+	}
+}

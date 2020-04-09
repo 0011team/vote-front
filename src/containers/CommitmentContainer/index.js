@@ -15,7 +15,7 @@ class CommitmentContainer extends Component {
                     <img src='/static/images/logo01.png' alt="더불어 민주당"  />
                   </div>
                   <div className="cnts">
-                    여성폭력 OUT! 여성이 안전한 사회를 만들겠습니다. 더불어민주당은 강력한 여성폭력 근절 대책을 통해 ‘모든 여성이 …
+                    0011 은
                   </div>
                 </li>
               </ul>

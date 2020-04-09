@@ -647,6 +647,9 @@ header {
 			text-align: center;
 		}
 	}
+	a {
+		cursor: pointer;
+	}
 }
 .preg-w {
 	.inner {
@@ -704,6 +707,9 @@ header {
 					font-size: 14px;
 				}
 			}
+		}
+		a {
+			cursor: pointer;
 		}
 	}
 }

@@ -12,11 +12,6 @@ class ProportionalContainer extends Component {
     return { lang }
   }
 
-  componentDidMount () {
-    const { getTopRepos } = this.props
-    getTopRepos({ lang: 'ruby' })
-  }
-
   render () {
     const { repos } = this.props
     return (

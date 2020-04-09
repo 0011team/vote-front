@@ -63,12 +63,12 @@ class Candidate21 extends Component {
               공약보기(해당 의원의 선관위 공약 페이지로 이동합니다)
             </div>  
           </a>
-          {/* TODO <a href={`http://info.nec.go.kr/electioninfo/candidate_detail_info.xhtml?electionId=0020200415&huboId=${candidateInfo.nec_id}`} target="_blank">
+          <a href={`http://info.nec.go.kr/electioninfo/candidate_detail_info.xhtml?electionId=0020200415&huboId=${candidateInfo.nec_id}`} target="_blank">
             <div className="keyword-info">
               전과, 체납, 학력 등 더 자세한 정보보기<br/>
               (해당 의원의 선관위 공약 페이지로 이동합니다)
             </div>
-          </a> */}
+          </a>
           <div className="info-table">
             <ul> 
               <li>

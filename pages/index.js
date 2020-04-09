@@ -4,29 +4,29 @@ import { Map } from 'immutable'
 import { connect } from 'react-redux'
 import { getTopRepos } from 'actions/repos'
 import { queryAddress } from 'utils/services/api'
+import { geolocated, geoPropTypes } from "react-geolocated";
 
 import SearchDistrictContainer from 'containers/SearchDistrictContainer'
 import ProportionalContainer from 'containers/PRContainer'
+import { renderStatic } from 'react-helmet'
 
 class Home extends Component {
 
-  static async getInitialProps (ctx) {
-    const res = await queryAddress().
-      then((res) => {
-        return res
-      });
-    return {states : res.data }
-  }
+  // static async getInitialProps (ctx) {
+    
+  // }
 
   constructor(props) {
     super(props);
     this.state = {
       hidden: false,
       districtActive: true,
-      stateValue: "",
       provinceList: [], 
       uniqueProvinceList: [],
-      selectedDistricts: ""
+      selectedDistricts: "",
+      states: [],
+      stateValue: "서울특별시",
+      townValue: ""
     };
     this.handleChangeState = this.handleChangeState.bind(this)
     this.handleDistrictSearch = this.handleDistrictSearch.bind(this)
@@ -37,6 +37,13 @@ class Home extends Component {
     this.setState({
       stateValue: '서울특별시'
     });
+    const res = queryAddress().
+      then((res) => {
+        this.setState({
+          states: res.data
+        })
+    });
+    
     
     const towns = queryAddress('서울특별시').then((res) => {
       
@@ -46,6 +53,25 @@ class Home extends Component {
         uniqueProvinceList: this.uniqByList(copyData, it => it.province )
       })
     }); 
+
+    const script = document.createElement("script");
+    script.async = true;
+    script.src =
+      "//dapi.kakao.com/v2/maps/sdk.js?appkey=996c4a7027802de18a9994dd3bb15083&autoload=false&libraries=services";
+      
+    document.head.appendChild(script);
+
+    script.onload = () => {
+      kakao.maps.load(() => {
+        const option = {
+            center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+            level: 3 // 지도의 확대 레벨
+        };
+        const el = this.mapRef;
+        //지도생성
+        const map = new kakao.maps.Map(el, option);
+      });
+    };
   }
 
 
@@ -72,6 +98,7 @@ class Home extends Component {
       stateValue: e.target.value
     });
     const towns = await queryAddress(e.target.value).then((res) => {
+      
       this.setState({
         provinceList: res.data,
         uniqueProvinceList: this.uniqByList(res.data, it => it.province )
@@ -97,13 +124,70 @@ class Home extends Component {
   handleDistrictSearch = (e, district) => {
     e.preventDefault();
     this.props.router.push(`/district?district=${district.name}`)
-    // this.props.router.push(`/district/20/detail?district=${district.name}`)
   }
 
-  render () {
-    const { states } = this.props
-    const { provinceList, selectedDistricts, uniqueProvinceList} = this.state;
+  searchAddrFromCoords = (coords, callback) => {
+    // 좌표로 행정동 주소 정보 요청
+    const geocoder = new kakao.maps.services.Geocoder();
+    geocoder.coord2RegionCode(coords.longitude, coords.latitude, callback);         
+  }
 
+  handleLocation = async () => {
+    const { states } = this.state;
+
+    const matchedState = await this.searchAddrFromCoords(this.props.coords, (result, status) => {
+      // console.log(this.state.provinceList);
+      if (status == "OK") {
+        const state = result[0].region_1depth_name
+        const town = result[0].region_2depth_name
+
+
+        const matched = states.find( (item) => {
+          return item == state
+        })
+
+        this.setState({
+          stateValue: matched
+        }, () => {
+          queryAddress(matched).then((res) => {
+            console.log("hello", town)
+            this.setState({
+              provinceList: res.data,
+              uniqueProvinceList: this.uniqByList(res.data, it => it.province )
+            }, () => {
+                let selected = [];
+                var el = this.state.provinceList.find(item => item.province.includes(town));
+                console.log(el)
+
+                this.state.provinceList.map( (item) => {
+                    if (item.province == el.province) {
+                      selected.push(item)  
+                  }
+                })
+                
+                return this.setState({
+                    selectedDistricts: selected,
+                    townValue: el.province
+                })
+              
+            })
+          }); 
+        })
+
+      } else {
+        alert("현재 위치의 해당정보를 가져올 수 없습니다. ")
+      }
+    })
+  } 
+
+
+  render () {
+    const { states, provinceList, selectedDistricts, uniqueProvinceList} = this.state;
+    const mapWidth = {
+      width: 0,
+      height: 0
+    };
+    
     return (
       <Fragment>
         <main id="snContent">
@@ -120,12 +204,18 @@ class Home extends Component {
             </div>
             { this.state.districtActive ? (<div className="search">
               <div>
-              <select value={this.state.provinceValue} onChange={this.handleChangeState}>
+              <select 
+                value={this.state.stateValue} 
+                onChange={this.handleChangeState}
+              >
               {
                 states.map( (item, index) => <option key={index} value={item}>{item}</option>) 
               }
               </select>
-              <select title="선거구 선택" onChange={this.handleChangeDistrict}>
+              <select 
+                title="선거구 선택" 
+                value={this.state.townValue} 
+                onChange={this.handleChangeDistrict}>
               {
                 uniqueProvinceList.length > 0 ? uniqueProvinceList.map( (item, index) => <option key={index} value={item.province}>{item.province}</option>) : <option>시군구명</option> 
               }
@@ -141,7 +231,11 @@ class Home extends Component {
                   </button>
                 )}) : ""
               }
-              <button type="`ssubmit">내 위치에서 검색</button>
+              {/* 지도 검색용  */}
+              <div className="map_wrap" style={mapWidth}>
+                <div className="map" id="map" ref={ref => (this.mapRef = ref)}></div>
+              </div>
+              <button onClick={this.handleLocation}>내 위치에서 검색</button>
             </div>) : 
             (<div className="candidacy">
               <h2>후보정당</h2>
@@ -188,4 +282,12 @@ class Home extends Component {
   }
 }
 
-export default Home;
+// export default Home;
+
+
+export default geolocated({
+    positionOptions: {
+        enableHighAccuracy: false,
+    },
+    userDecisionTimeout: 5000,
+})(Home);

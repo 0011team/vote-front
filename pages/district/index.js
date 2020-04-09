@@ -47,9 +47,9 @@ class LawmakerSummary extends Component {
               <li className={this.state.districtActive ?  "selected" : '' }>
                 <a href="#">지역구</a>
               </li>
-              <li className={!this.state.districtActive ?  "selected" : '' }>
+              {/* <li className={!this.state.districtActive ?  "selected" : '' }>
                 <a href="#">비례대표</a>
-              </li>
+              </li> */}
             </ul>
           </div>
         </div>

@@ -1,7 +1,7 @@
 import axios from 'axios'; 
 
-// const apiUrl = 'http://dev-api.seeso.kr'
-const apiUrl = 'http://localhost:8000'
+const apiUrl = 'http://api.vote.0011.team'
+// const apiUrl = 'http://localhost:8000'
 
 const codeMessage = {
   200: '성공적으로 데이터를 가지고 왔습니다. ',

@@ -8,7 +8,7 @@ export default class Layout extends PureComponent {
       <div className='header-w'>
         <header>
           <h1>
-            <a href="/">0011</a><span>모다정</span>
+            <a href="/">0011</a><span>모두다정치</span>
           </h1>
 				  <div className="menu">
 					  <button type="button"><span>메뉴</span></button>

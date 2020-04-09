@@ -119,7 +119,8 @@
 				width: 100%;
                 color: #484848;
                 max-height: 95px;
-				overflow: scroll;
+				overflow-x: hidden;
+				overflow-y: hidden;
 				p {
                     font-size: 12px;
 					word-break: keep-all;

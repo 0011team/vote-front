@@ -49,7 +49,9 @@ class LawmakerDetail20 extends Component {
         <AnalyzeContainer
           info={lawMakerInfo}
          />
-        <MajorCommitContainer />
+        <MajorCommitContainer
+          info={lawMakerInfo}
+       />
       </Fragment>
     )
   }

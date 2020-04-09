@@ -7,8 +7,16 @@ import App from 'next/app'
 import createStore from 'store/createStore'
 import Layout from 'components/Layout'
 import theme from 'theme'
+import { initGA, logPageView } from 'utils/analytics'
 
 class MyApp extends App {
+  componentDidMount () {
+    if (!window.GA_INITIALIZED) {
+      initGA()
+      window.GA_INITIALIZED = true
+    }
+    logPageView()
+  }
   render () {
     const { Component, pageProps, router, store } = this.props
     return (

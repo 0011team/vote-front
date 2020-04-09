@@ -266,7 +266,7 @@ header {
 		position: absolute;
 		top: 30px;
 		right: -12px;
-		width: 265px;
+		width: 292px;
 		padding: 10px 12px;
 		border: 1px solid #d1d1d6;
 		border-radius: 8px;
@@ -275,8 +275,13 @@ header {
 		font-size: 13px;
 		line-height: 20px;
 		box-sizing: border-box;
+		word-break: keep-all;
+		a {
+			text-decoration: underline;
+		}
 	}
-	button:focus + p {
+
+	button + p.actv {
 		display: block;
 	}
 }
@@ -287,6 +292,12 @@ header {
 		@include inlay;
 		padding: 0 0 20px 20px;
 	}
+	p {
+		word-break: keep-all;
+    	line-height: 1.6;
+    	font-size: 12px;
+	}
+	
 }
 .cnts-bgbox {
 	padding: 20px 0 30px;
@@ -308,7 +319,7 @@ header {
 		> ul {
 			> li {
 				position: relative;
-				min-height: 116px;
+				min-height: 90px;
 				margin-top: 16px;
 				padding: 16px;
 				background: #fff;

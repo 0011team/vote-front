@@ -1,6 +1,6 @@
 import axios from 'axios'; 
 
-const apiUrl = 'http://api.vote.0011.team'
+const apiUrl = 'https://api.vote.0011.team'
 // const apiUrl = 'http://localhost:8000'
 
 const codeMessage = {

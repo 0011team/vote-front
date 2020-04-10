@@ -47,10 +47,21 @@ class Home extends Component {
     
     const towns = queryAddress('서울특별시').then((res) => {
       
-      let copyData = res.data;
+      
+      let provinceList = res.data;
+
+      let copyData = provinceList;
+      
+      let uList = this.uniqByList(copyData, it => it.province );
+      
+      uList.unshift({
+        province: "지역보기",
+        town: []
+      })
+      
       this.setState({
-        provinceList: res.data,
-        uniqueProvinceList: this.uniqByList(copyData, it => it.province )
+        provinceList: provinceList,
+        uniqueProvinceList:uList 
       })
     }); 
 
@@ -123,7 +134,8 @@ class Home extends Component {
 
   handleDistrictSearch = (e, district) => {
     e.preventDefault();
-    this.props.router.push(`/district?district=${district.name}`)
+    window.location.href = `https://vote.0011.team/district?district=${district.name}`
+    // this.props.router.push()
   }
 
   searchAddrFromCoords = (coords, callback) => {
@@ -150,15 +162,13 @@ class Home extends Component {
           stateValue: matched
         }, () => {
           queryAddress(matched).then((res) => {
-            console.log("hello", town)
+            
             this.setState({
               provinceList: res.data,
               uniqueProvinceList: this.uniqByList(res.data, it => it.province )
             }, () => {
                 let selected = [];
                 var el = this.state.provinceList.find(item => item.province.includes(town));
-                console.log(el)
-
                 this.state.provinceList.map( (item) => {
                     if (item.province == el.province) {
                       selected.push(item)  

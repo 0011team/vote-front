@@ -40,7 +40,6 @@ class Candidate21 extends Component {
     const { district } = this.props.router.query
     const { candidateInfo } = this.props;
 
-    console.log(candidateInfo)
     return (
       <Fragment>
          <CandidacyContainer

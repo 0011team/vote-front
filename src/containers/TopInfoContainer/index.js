@@ -4,7 +4,7 @@ import './topInfoContainer.scss';
 class TopInfoContainer extends Component {
   render () {
     const { district, info } = this.props
-    console.log(this.props.router)
+    
     return (
       <Fragment>     
         <div className="top-info-container">

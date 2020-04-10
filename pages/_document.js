@@ -43,22 +43,22 @@ export default class extends Document {
       .map(el => this.props.helmet[el].toComponent())
   }
 
-  get helmetJsx () {
-    const title = 'Hello next.js Real World!'
-    return (
-      <Helmet>
-        <title>{title}</title>
-        <meta name='viewport' content='width=device-width, initial-scale=1' />
-        <meta property='og:title' content={title} />
-      </Helmet>
-    )
-  }
+  // get helmetJsx () {
+  //   const title = 'Hello next.js Real World!'
+  //   return (
+  //     <Helmet>
+  //       <title>{title}</title>
+  //       <meta name='viewport' content='width=device-width, initial-scale=1' />
+  //       <meta property='og:title' content={title} />
+  //     </Helmet>
+  //   )
+  // }
 
   render () {
     return (
       <html {...this.helmetHtmlAttrComponents}>
         <Head>
-          { this.helmetJsx }
+          {/* { this.helmetJsx } */}
           { this.helmetHeadComponents }
         </Head>
         <body {...this.helmetBodyAttrComponents}>

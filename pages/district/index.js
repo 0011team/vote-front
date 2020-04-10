@@ -37,7 +37,6 @@ class LawmakerSummary extends Component {
   render() {
     const { district } = this.props.router.query
     const { summaryInfo } = this.props;
-    console.log(summaryInfo)
 
     return (
       <Fragment>

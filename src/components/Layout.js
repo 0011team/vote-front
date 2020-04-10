@@ -10,9 +10,9 @@ export default class Layout extends PureComponent {
           <h1>
             <a href="/">0011</a><span>모두다정치</span>
           </h1>
-				  <div className="menu">
+				  {/* <div className="menu">
 					  <button type="button"><span>메뉴</span></button>
-				  </div>
+				  </div> */}
         </header>
         <hr />
         { this.props.children }

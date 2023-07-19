@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import Link from 'next/link'
-import "./_style.scss"
+// import * as S from './_styles.module.scss' //throw an error in the terminal
+import "./_styles.module.scss"
 
 export default class Layout extends PureComponent {
   render () {

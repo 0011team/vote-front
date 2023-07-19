@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { getTopRepos } from 'actions/repos'
 import SearchResults from 'components/SearchResults'
 import CommitmentContainer from '../CommitmentContainer';
-import './SearchContainer.scss';
+import './SearchContainer.module.scss';
 
 class SearchDistrictContainer extends Component {
   static async getInitialProps ({ store, query }) {

@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import './CommitmentContainer.scss';
+import './CommitmentContainer.module.scss';
 
 class CommitmentContainer extends Component {
 
@@ -44,5 +44,7 @@ class CommitmentContainer extends Component {
   }
 
 }
+
+
 
 export default CommitmentContainer;
